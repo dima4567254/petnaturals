@@ -1,0 +1,502 @@
+@use "sass:math";
+@import 'vars';
+@import 'fonts';
+@import 'reset';
+@import 'mexins';
+@import 'global';
+@import 'libs';
+
+.header {
+  padding-top: 25px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: transparent;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @include adaptiveValue("gap", 20, 0);
+
+
+  &__logo {
+    width: rem(330);
+    height: rem(115);
+    object-fit: cover;
+  }
+
+  &__items {
+    display: flex;
+    justify-content: space-between;
+    @include adaptiveValue("gap", 50, 20);
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 47%;
+      top: 50%;
+      transform: translateY(-50%) translateX(-50%);
+      height: rem(100);
+      width: rem(445);
+      background-image: url('../images/sprite/cloud.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      z-index: -1;
+    }
+  }
+
+  // &__item {}
+
+  &__link {
+    color: rgb(113, 93, 0);
+    font-size: rem(20);
+    @include line-height(20, 23);
+    letter-spacing: 0%;
+    text-decoration: underline 1px solid;
+    text-transform: uppercase;
+    transition: color .5s;
+
+    &:focus {
+      color: $focus;
+    }
+
+    &:hover {
+      color: $ac;
+    }
+
+    &:active {
+      color: $active;
+    }
+  }
+}
+
+.intro {
+  background-image: url('../images/dist/main_bg.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+  }
+
+  &__wrapper {
+    // z-index: 1;
+    margin-top: 20px;
+  }
+
+  &__wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 20px 20px 10px 10px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    background: rgb(253, 252, 252);
+    max-width: rem(270);
+    padding: 2.5rem 2.5rem 2rem 2.5rem;
+    position: relative;
+    z-index: 1;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      height: 19rem;
+      width: rem(270);
+      border-radius: 20px 20px 0px 0px;
+      background-image: url('../images/dist/rectangle.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      z-index: -1;
+    }
+  }
+
+  &__title {
+    color: rgb(249, 233, 148);
+    font-size: rem(52);
+    @include line-height(52, 61);
+    text-align: center;
+    max-width: rem(580);
+    margin: 0 auto;
+    margin-bottom: 1rem;
+  }
+
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: rem(75);
+  }
+
+
+  // &__box {}
+
+  &__text {
+    color: rgb(246, 247, 228);
+    @include adaptiveValue("margin-bottom", 60, 20);
+    max-width: rem(490);
+  }
+
+  &__items {
+    @include adaptiveValue("padding-bottom", 15, 0);
+    @include adaptiveValue("padding-top", 35, 10);
+    @include adaptiveValue("padding-left", 35, 10);
+    @include adaptiveValue("padding-right", 30, 10);
+    border-radius: 20px;
+    background: rgb(127, 179, 225);
+    max-width: rem(325);
+  }
+
+  &__item {
+    @include adaptiveValue("padding-left", 35, 20);
+    color: rgb(223, 228, 222);
+    font-size: rem(22);
+    @include line-height(22, 26);
+    margin-bottom: rem(20);
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%); //только по горизонтали
+      width: rem(18);
+      height: rem(24);
+      background-image: url('../images/dist/paw-web.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+    }
+  }
+
+  // &__svg {}
+
+  &__images {
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: -12%;
+      top: 7%;
+      transform: translateX(-50%);
+      height: rem(390);
+      width: rem(320);
+      background-image: url('../images/dist/cat-left.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      z-index: 2;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      transform: translateX(-50%);
+      left: 110%;
+      top: 6%;
+      height: rem(390);
+      width: rem(320);
+      background-image: url('../images/dist/cat-right.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      z-index: 2;
+    }
+  }
+
+  &__img {
+    width: rem(390);
+    height: rem(390);
+    object-fit: cover;
+  }
+
+  &__subtext {
+    font-size: rem(33);
+    font-weight: 700;
+    @include line-height(33, 39);
+    letter-spacing: 0%;
+    margin-bottom: rem(10);
+    text-transform: uppercase;
+  }
+
+  &__time {
+    color: rgb(246, 231, 145);
+    font-size: rem(36);
+    @include line-height(36, 42);
+    // margin-bottom: rem(5);
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    @include adaptiveValue("margin-bottom", 55, 20);
+  }
+
+  &__old {
+    color: rgb(107, 107, 107);
+    font-size: rem(30);
+    @include line-height(30, 35);
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 0;
+      height: 2px;
+      width: rem(102);
+      background-color: rgb(246, 190, 145);
+      transform: rotate(162.55deg);
+    }
+  }
+
+  &__new {
+    font-size: rem(36);
+    @include line-height(36, 42);
+  }
+
+  &__data {
+    color: rgb(68, 68, 68);
+    font-size: rem(18);
+    font-weight: 400;
+    @include line-height(18, 21);
+    text-align: center;
+  }
+}
+
+.form {
+  &__label {
+    position: relative;
+    margin-bottom: rem(15);
+    display: block;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 6%;
+      top: 62%;
+      transform: translateY(-50%); //только по горизонтали
+      height: rem(35);
+      width: rem(35);
+      background-image: url('../images/dist/paw.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      z-index: 100;
+    }
+  }
+
+  &__input {
+    max-width: rem(220);
+    border-radius: 30px;
+    background: rgb(243, 239, 239);
+    @include adaptiveValue("padding-left", 55, 20);
+    @include adaptiveValue("padding-right", 40, 20);
+    // padding-top: rem(9);
+    // padding-bottom: rem(9);
+    padding-top: rem(15);
+    padding-bottom: rem(15);
+    border: none;
+    position: relative;
+    color: rgb(119, 119, 119);
+    font-size: rem(16);
+    @include line-height(16, 19);
+
+    &::placeholder {
+      color: rgb(119, 119, 119);
+      font-size: rem(16);
+      @include line-height(16, 19);
+    }
+  }
+
+  &__btn {
+    border: none;
+    border-radius: 30px;
+    background: rgb(161, 211, 55);
+    color: rgb(255, 255, 255);
+    font-size: rem(30);
+    text-transform: uppercase;
+    @include adaptiveValue("padding-bottom", 8, 0);
+    @include adaptiveValue("padding-top", 7, 0);
+    @include adaptiveValue("padding-left", 63, 20);
+    @include adaptiveValue("padding-right", 63, 20);
+    @include line-height(30, 35);
+    @include adaptiveValue("margin-bottom", 30, 20);
+    transition: background-color .5s, color .5s;
+
+    &:focus {
+      background-color: $ac;
+      color: white;
+    }
+
+    &:hover {
+      color: $ac;
+    }
+
+    &:active {
+      color: $active;
+    }
+  }
+}
+
+.about {
+  background-image: url('../images/dist/manufacturer-bg.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  @include adaptiveValue("padding-bottom", 50, 20);
+  @include adaptiveValue("padding-top", 100, 40);
+
+  &__title {
+    font-size: rem(52);
+    font-weight: 700;
+    @include line-height(52, 61);
+    text-align: center;
+    @include adaptiveValue("margin-bottom", 60, 20);
+    color: transparent;
+    background-clip: text;
+    background-image: linear-gradient(180.00deg, rgb(249, 233, 148), rgb(83, 125, 19), rgb(72, 60, 8));
+  }
+
+  &__items {
+    display: flex;
+    justify-content: space-between;
+    @include adaptiveValue("gap", 85, 20);
+  }
+
+  &__item {
+    border-radius: 20px;
+    box-shadow: 2px 4px 5px 0px rgba(0, 0, 0, 0.25);
+    background: rgb(246, 231, 145);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    max-width: rem(305);
+    padding: rem(15);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  &__wrap {
+    border-radius: 20px;
+    background: rgba(161, 211, 55, 0.4);
+    padding: rem(20);
+    padding-top: 25px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 10px;
+    height: 100%;
+  }
+
+  &__img {
+    width: rem(185);
+    height: rem(185);
+    object-fit: cover;
+    margin-bottom: rem(5);
+  }
+
+  &__subtitle {
+    color: rgb(255, 255, 255);
+    font-size: rem(22);
+    @include line-height(22, 26);
+    margin-bottom: rem(20);
+    text-align: center;
+  }
+
+  &__text {
+    font-size: rem(18);
+    font-weight: 400;
+    @include line-height(18, 21);
+    text-align: center;
+  }
+}
+
+.results {
+  background-image: url('../images/dist/best-bg.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  @include adaptiveValue("padding-bottom", 100, 40);
+  @include adaptiveValue("padding-top", 100, 40);
+
+  &__title {
+    color: rgb(83, 125, 19);
+    font-size: rem(52);
+    font-weight: 700;
+    @include line-height(52, 61);
+    text-align: center;
+    @include adaptiveValue("margin-bottom", 90, 20);
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    @include adaptiveValue("gap", 125, 20);
+  }
+
+  &__background {
+    position: relative;
+    @include adaptiveValue("font-size", 40, 20);
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -11%;
+      left: -6%;
+      transform: translateY(-3%) translateX(-0%);
+      width: rem(760);
+      height: rem(355);
+      background-image: url('../images/sprite/figure.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      z-index: 1;
+    }
+  }
+
+  &__text {
+    font-weight: 400;
+    @include line-height(18, 23);
+    max-width: rem(620);
+    font-size: rem(18);
+  }
+
+  &__text p {
+    &:not(:last-child) {
+      @include adaptiveValue("margin-bottom", 20, 0);
+    }
+  }
+
+  &__img {
+    width: rem(300);
+    height: rem(300);
+    object-fit: cover;
+  }
+}
