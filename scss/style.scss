@@ -7,13 +7,17 @@
 @import 'libs';
 
 .header {
-  padding-top: 25px;
+  padding-top: rem(25);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: 200;
   background-color: transparent;
+
+  @media (max-width: 768px) {
+    padding-top: rem(5);
+  }
 }
 
 .menu {
@@ -22,18 +26,89 @@
   align-items: center;
   @include adaptiveValue("gap", 20, 0);
 
-
   &__logo {
     width: rem(330);
     height: rem(115);
     object-fit: cover;
+    z-index: 7;
+  }
+
+  &__btn {
+    width: 30px;
+    height: 22px;
+    position: relative;
+    border: none;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    padding: 0;
+    z-index: 10;
+
+    @media (min-width: 768px) {
+      display: none;
+    }
+
+    span,
+    &::before,
+    &::after {
+      transition: all 0.5s;
+      position: absolute;
+      content: '';
+      height: 3px;
+      width: 100%;
+      background-color: $btn-menu;
+    }
+
+    &::before,
+    &::after {
+      position: absolute;
+      content: '';
+    }
+
+    &::before {
+      top: 0;
+    }
+
+    &::after {
+      bottom: 0;
+    }
+
+    &.active span {
+      transform: scale(0);
+    }
+
+    &.active:before {
+      transform: rotate(45deg);
+      top: 9px;
+    }
+
+    &.active::after {
+      transform: rotate(-45deg);
+      bottom: 9px;
+    }
   }
 
   &__items {
+    transform: translateY(-200%);
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    left: 0;
+    flex-direction: column;
+    align-items: center;
+    z-index: 5;
+    background-color: #edf1f4;
+    transition: transform 1s;
+    padding: 55px 0 20px;
+    height: 50vh;
     display: flex;
-    justify-content: space-between;
-    @include adaptiveValue("gap", 50, 20);
-    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &.active {
+      transform: translateY(0%);
+    }
 
     &::before {
       content: "";
@@ -42,27 +117,67 @@
       right: 0;
       left: 47%;
       top: 50%;
-      transform: translateY(-50%) translateX(-50%);
-      height: rem(100);
-      width: rem(445);
-      background-image: url('../images/sprite/cloud.svg');
+      transform: translateY(-63%) translateX(-50%);
+      height: 10rem;
+      width: 45.5rem;
+      background-image: none;
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
       z-index: -1;
     }
+
+    @media (min-width: 768px) {
+      transform: inherit;
+      position: inherit;
+      display: flex;
+      justify-content: space-between;
+      @include adaptiveValue("gap", 50, 20);
+      background-color: transparent;
+      flex-direction: row;
+      padding: 0;
+      width: inherit;
+      margin-right: rem(45);
+      height: inherit;
+      position: relative;
+
+      @media (min-width: 768px) {
+        margin-right: rem(85);
+      }
+
+      &::before {
+        background-image: url('../images/sprite.svg#cloud');
+        transform: translateY(-50%) translateX(-50%);
+      }
+    }
   }
 
-  // &__item {}
+  &__item {
+    width: 100%;
+    text-align: center;
+    margin-bottom: rem(20);
+
+    &:not(:last-child) {
+      margin-right: 0;
+    }
+
+    @media (min-width: 768px) {
+      margin-bottom: 0;
+    }
+  }
 
   &__link {
-    color: rgb(113, 93, 0);
+    display: block;
     font-size: rem(20);
-    @include line-height(20, 23);
-    letter-spacing: 0%;
-    text-decoration: underline 1px solid;
-    text-transform: uppercase;
-    transition: color .5s;
+
+    @media (min-width: 1200px) {
+      color: rgb(113, 93, 0);
+      @include line-height(20, 23);
+      letter-spacing: 0%;
+      text-decoration: underline 1px solid;
+      text-transform: uppercase;
+      transition: color .5s;
+    }
 
     &:focus {
       color: $focus;
@@ -78,6 +193,7 @@
   }
 }
 
+
 .intro {
   background-image: url('../images/dist/main_bg.jpg');
   background-position: center;
@@ -89,6 +205,10 @@
   position: relative;
   z-index: 1;
 
+  @media (max-width: 992px) {
+    height: 100%;
+  }
+
   &::before {
     content: "";
     position: absolute;
@@ -98,8 +218,15 @@
   }
 
   &__wrapper {
-    // z-index: 1;
-    margin-top: 20px;
+    margin-top: rem(20);
+
+    @media (min-width: 768px) {
+      margin-top: rem(40);
+    }
+
+    @media (max-width: 992px) {
+      margin-top: 10%;
+    }
   }
 
   &__wrap {
@@ -133,8 +260,6 @@
 
   &__title {
     color: rgb(249, 233, 148);
-    font-size: rem(52);
-    @include line-height(52, 61);
     text-align: center;
     max-width: rem(580);
     margin: 0 auto;
@@ -146,10 +271,13 @@
     justify-content: space-between;
     align-items: center;
     gap: rem(75);
+
+    @media (max-width: 992px) {
+      flex-wrap: wrap;
+      align-items: start;
+      gap: rem(45);
+    }
   }
-
-
-  // &__box {}
 
   &__text {
     color: rgb(246, 247, 228);
@@ -168,12 +296,16 @@
   }
 
   &__item {
-    @include adaptiveValue("padding-left", 35, 20);
+    padding-left: 25px;
     color: rgb(223, 228, 222);
     font-size: rem(22);
     @include line-height(22, 26);
     margin-bottom: rem(20);
     position: relative;
+
+    @media (min-width: 768px) {
+      @include adaptiveValue("padding-left", 35, 20);
+    }
 
     &::before {
       content: "";
@@ -189,8 +321,6 @@
       background-size: cover;
     }
   }
-
-  // &__svg {}
 
   &__images {
     position: relative;
@@ -208,6 +338,10 @@
       background-position: center;
       background-size: cover;
       z-index: 2;
+
+      @media (max-width: 992px) {
+        display: none;
+      }
     }
 
     &::after {
@@ -223,13 +357,26 @@
       background-position: center;
       background-size: cover;
       z-index: 2;
+
+      @media (max-width: 992px) {
+        display: none;
+      }
     }
   }
 
   &__img {
-    width: rem(390);
+    width: rem(250);
     height: rem(390);
     object-fit: cover;
+
+    @media (min-width: 992px) {
+      width: rem(390);
+      height: rem(390);
+    }
+
+    @media (max-width: 1200px) {
+      width: 250px;
+    }
   }
 
   &__subtext {
@@ -245,7 +392,6 @@
     color: rgb(246, 231, 145);
     font-size: rem(36);
     @include line-height(36, 42);
-    // margin-bottom: rem(5);
   }
 
   &__info {
@@ -314,10 +460,8 @@
     max-width: rem(220);
     border-radius: 30px;
     background: rgb(243, 239, 239);
-    @include adaptiveValue("padding-left", 55, 20);
+    padding-left: 40px;
     @include adaptiveValue("padding-right", 40, 20);
-    // padding-top: rem(9);
-    // padding-bottom: rem(9);
     padding-top: rem(15);
     padding-bottom: rem(15);
     border: none;
@@ -325,6 +469,10 @@
     color: rgb(119, 119, 119);
     font-size: rem(16);
     @include line-height(16, 19);
+
+    @media (min-width: 768px) {
+      @include adaptiveValue("padding-left", 55, 20);
+    }
 
     &::placeholder {
       color: rgb(119, 119, 119);
@@ -340,8 +488,8 @@
     color: rgb(255, 255, 255);
     font-size: rem(30);
     text-transform: uppercase;
-    @include adaptiveValue("padding-bottom", 8, 0);
-    @include adaptiveValue("padding-top", 7, 0);
+    @include adaptiveValue("padding-bottom", 8, 8);
+    @include adaptiveValue("padding-top", 7, 7);
     @include adaptiveValue("padding-left", 63, 20);
     @include adaptiveValue("padding-right", 63, 20);
     @include line-height(30, 35);
@@ -368,13 +516,9 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  @include adaptiveValue("padding-bottom", 50, 20);
-  @include adaptiveValue("padding-top", 100, 40);
 
   &__title {
-    font-size: rem(52);
     font-weight: 700;
-    @include line-height(52, 61);
     text-align: center;
     @include adaptiveValue("margin-bottom", 60, 20);
     color: transparent;
@@ -383,9 +527,15 @@
   }
 
   &__items {
-    display: flex;
-    justify-content: space-between;
-    @include adaptiveValue("gap", 85, 20);
+    display: block;
+
+    @media (min-width: 768px) {
+      justify-content: space-between;
+      @include adaptiveValue("gap", 85, 20);
+      display: flex;
+      flex-wrap: wrap;
+      // grid-template-columns: repeat(auto-fit, minmax(32rem, 1fr));
+    }
   }
 
   &__item {
@@ -398,20 +548,24 @@
     align-items: center;
     max-width: rem(305);
     padding: rem(15);
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
+
+    &:not(:last-child) {
+      margin-bottom: rem(40);
+
+      @media (min-width: 768px) {
+        margin-bottom: 0;
+      }
+    }
   }
 
   &__wrap {
     border-radius: 20px;
     background: rgba(161, 211, 55, 0.4);
     padding: rem(20);
-    padding-top: 25px;
-    padding-bottom: 20px;
-    padding-left: 20px;
-    padding-right: 10px;
+    padding-top: rem(25);
+    padding-bottom: rem(20);
+    padding-left: rem(20);
+    padding-right: rem(10);
     height: 100%;
   }
 
@@ -443,14 +597,10 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  @include adaptiveValue("padding-bottom", 100, 40);
-  @include adaptiveValue("padding-top", 100, 40);
 
   &__title {
     color: rgb(83, 125, 19);
-    font-size: rem(52);
     font-weight: 700;
-    @include line-height(52, 61);
     text-align: center;
     @include adaptiveValue("margin-bottom", 90, 20);
   }
@@ -458,12 +608,27 @@
   &__inner {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     @include adaptiveValue("gap", 125, 20);
+
+    @media (max-width: 768px) {
+      display: block;
+    }
   }
 
   &__background {
     position: relative;
     @include adaptiveValue("font-size", 40, 20);
+    margin-bottom: rem(40);
+
+    @media (min-width: 768px) {
+      display: block;
+      margin: 0;
+    }
+
+    @media (min-width: 992px) {
+      margin-left: 30px;
+    }
 
     &::before {
       content: "";
@@ -473,11 +638,16 @@
       transform: translateY(-3%) translateX(-0%);
       width: rem(760);
       height: rem(355);
-      background-image: url('../images/sprite/figure.svg');
+      background-image: url('../images/sprite.svg#figure');
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
       z-index: 1;
+      display: none;
+
+      @media (min-width: 992px) {
+        display: block;
+      }
     }
   }
 
@@ -490,7 +660,7 @@
 
   &__text p {
     &:not(:last-child) {
-      @include adaptiveValue("margin-bottom", 20, 0);
+      @include adaptiveValue("margin-bottom", 20, 20);
     }
   }
 

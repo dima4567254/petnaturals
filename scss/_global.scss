@@ -1,12 +1,8 @@
 html {
-  font-size: 62.5%;
+  font-size: 50%;
 
-  @media (max-width: 1200px) {
-    font-size: 50%;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 40%;
+  @media (min-width: 1200px) {
+    font-size: 62.5%;
   }
 }
 
@@ -16,7 +12,6 @@ body {
 }
 
 body {
-  // min-width: 320px;
   color: rgb(72, 60, 8);
   font-family: Roboto;
   font-size: rem(26);
@@ -43,50 +38,38 @@ body {
 
 .container {
   max-width: 1170px;
-  margin: 0 auto;
+  // margin: 0 auto;
   padding: 0 15px;
+
+  @media (min-width: 768px) {
+    margin: 0;
+  }
+
+  @media (min-width: 993px) {
+    margin: 0 auto;
+  }
 }
 
-.svg {
-  margin-right: 5px;
-}
+
 
 .title {
-  // font-size: 36px;
-  // text-align: center;
-  // letter-spacing: 0.04em;
-  // text-transform: uppercase;
-  // color: $black3;
+  font-size: rem(42);
+  @include line-height(42, 61);
 
-  // @media (max-width: 1200px) {
-  //     font-size: 34px;
-  // }
+  @media (max-width: 992px) {
+    font-size: rem(41);
+    @include line-height(41, 61);
+  }
 
-  // @media (max-width: 992px) {
-  //     font-size: 32px;
-  // }
-
-  // @media (max-width: 768px) {
-  //     font-size: 30px;
-  // }
-
-  // @media (max-width: 576px) {
-  //     font-size: 26px;
-  // }
+  @media (min-width: 768px) {
+    font-size: rem(52);
+    @include line-height(52, 61);
+  }
 }
 
 .section {
   @include adaptiveValue("padding-top", 100, 65);
   @include adaptiveValue("padding-bottom", 100, 65);
-}
-
-.logo {
-
-  // &__header {
-  //     width: 315px;
-  //     height: 80px;
-  //     object-fit: cover;
-  // }
 }
 
 .btn {
@@ -113,75 +96,7 @@ picture {
   line-height: 0;
 }
 
-// .video {
-//     background-position: center;
-//     background-repeat: no-repeat;
-//     background-size: cover;
-//     display: block;
-//     position: relative;
-//     border-radius: 6px;
-//     transition: color 0.5s;
-
-//     &:focus {
-//         color: $focus;
-//     }
-
-//     &:hover {
-//         .video__icon {
-//             transition: background-color 0.5s;
-//             background-color: $red;
-//         }
-//     }
-
-//     &:active {
-//         color: $active;
-//     }
-
-//     &__icon {
-//         position: absolute;
-//         top: 50%;
-//         left: 50%;
-//         transform: translateX(-50%);
-//         width: 65px;
-//         height: 40px;
-//         background: rgba(0, 0, 0, .55);
-//         border-radius: 6px;
-//         position: relative;
-
-//         &::before {
-//             content: "";
-//             position: absolute;
-//             top: 30%;
-//             left: 50%;
-//             transform: translateX(-50%);
-//             z-index: 100;
-//             border-color: transparent transparent transparent $white;
-//             border-style: solid;
-//             border-width: 9.5px 0 9.5px 17px;
-//         }
-//     }
-// }
-
 * {
-  // scrollbar-width: auto;
   scrollbar-color: #C0C0C0 #EFEFF1;
   //для потдержки скрола в фарфокс
 }
-
-// footer__link--indent
-
-// [class*="__container"] {
-//     background-color: red;
-// }
-
-// [class*="__text"] {
-//     @media (max-width: 768px) {
-//         font-size: 16px;
-//     }
-// надо будет еще протестить не грузит ли оно сайт
-// }
-
-// отзеркалить блок
-// &:nth-child(odd) {
-//   flex-direction: row-reverse;
-// }
